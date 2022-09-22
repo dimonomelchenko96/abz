@@ -1,0 +1,97 @@
+@import './variables';
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import './button';
+@import './mixin.scss';
+
+* {
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+}
+* {
+    box-sizing: border-box;
+}
+
+::before, ::after {
+    box-sizing: border-box;
+}
+
+// мінімальный резет
+ul,
+li,
+dl {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    &:hover {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+}
+
+body {
+    background: #F8F8F8;
+}
+
+.container {
+    max-width: 1170px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.preloader {
+    width: 50px;
+    height: 50px;
+    animation: rotate .8s infinite linear;
+}
+
+
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media screen and (max-width: 1200px){
+    .container {
+        width: 100%;
+        padding: 0 60px;
+    }
+}
+
+@media screen and (max-width: 992px){
+    .container {
+        padding: 0 32px;
+    }
+}
+

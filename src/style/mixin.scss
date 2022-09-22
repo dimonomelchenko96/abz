@@ -1,0 +1,14 @@
+@mixin title {
+    font-family: 'Nunito';
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+@mixin secondaryText {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+}

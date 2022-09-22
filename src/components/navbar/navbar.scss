@@ -1,0 +1,22 @@
+.navbar {
+    padding: 13px 0;
+    background: #FFFFFF;
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__logo-link {
+        display: block;
+        width: 104px;
+    }
+    &__logo-img {
+        width: 100%;
+    }
+    &__buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+}

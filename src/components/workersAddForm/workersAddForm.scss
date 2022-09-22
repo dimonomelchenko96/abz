@@ -1,0 +1,177 @@
+@import '../../style/mixin.scss';
+@import '../../style/variables.scss';
+
+.form-section {
+    padding-bottom: 100px;
+    &__title {
+        @include title;
+        color: $text-black-color;
+    }
+    &__form {
+        max-width: 380px;
+        width: 100%;
+        margin: 50px auto 0;
+    }
+}
+
+.form {
+    &__item {
+        position: relative;
+        height: 54px;
+        width: 100%;
+        &:not(:last-child) {
+            margin-bottom: 50px;
+        }
+    }
+    &__input {
+        padding: 14px 16px;
+        border: 1px solid #D0CFCF;
+        border-radius: 4px;
+        width: 100%;
+        height: 100%;
+        background: inherit;
+        @include secondaryText;
+        display: flex;
+        align-items: center;
+        color: $text-black-color;
+        &-error {
+            border: 2px solid #CB3D40;
+            &+label {
+                color: #CB3D40;  
+            }
+        }
+
+        &:focus {
+            outline: none;
+        }
+        &-label {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            @include secondaryText;
+            color: #7E7E7E;
+            transition: .3s;
+            pointer-events: none;
+        }
+    }
+    &__error {        
+        padding-left: 16px;
+        margin-top: 4px;
+        font-family: 'Nunito';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        color: #CB3D40;
+    }
+    &__radio {
+        &-block {
+            margin-top: 43px;
+        }
+        &-title {
+            margin-bottom: 11px;
+            @include secondaryText;
+            color: rgba(0, 0, 0, 0.87);   
+        }
+        &-item {
+            display: flex;
+            align-items: center;
+            &:not(:last-child) {
+                margin-bottom: 7px;
+            }
+
+            input {
+                position: absolute;
+                opacity: 0;
+                visibility: hidden;
+                + label {
+                    position: relative;
+                    padding-left: 32px;
+                    cursor: pointer;
+                    color: $text-black-color;
+                    @include secondaryText;
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        width: 20px;
+                        height: 20px;
+                        border: 1px solid #00BDD3;
+                        border-radius: 100%;
+                    }
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        left: 5px;
+                        top: 50%;
+                        opacity: 0;
+                        transform: translateY(-50%);
+                        width: 10px;
+                        height: 10px;
+                        background: #00BDD3;
+                        border-radius: 100%;
+                        // transition: all .3s;
+                    }
+                }
+                &:checked {
+                    + label::after {
+                            opacity: 1;
+                        }
+        
+                }
+            }
+        }
+    }
+    &__button {
+        margin: 50px auto 0;
+    }
+    &__photo {
+        &-block {
+            margin-top: 47px;
+        }
+        &-wrapper {
+            width: 100%;
+            height: 54px;
+            @include secondaryText;
+            display: flex;
+        }
+        &-fake-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid $text-black-color;
+            border-radius: 4px 0px 0px 4px;
+            width: 83px;
+            height: 100%;
+            cursor: pointer;
+        }
+        &-input {
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+        }
+        &-name {
+            display: flex;
+            align-items: center;
+            padding-left: 16px;
+            @include secondaryText;
+            flex-grow: 1;
+            color: #7E7E7E;
+            border: 1px solid #D0CFCF;
+            border-left: none;
+            border-radius: 0 4px 4px 0;
+        }
+    }
+}
+
+.form__input:focus~.form__input-label,
+.active {
+    top: 0;
+    padding: 0 4px;
+    font-size: 12px;
+    line-height: 14px;
+    background: #F8F8F8;
+}

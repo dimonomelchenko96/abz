@@ -1,0 +1,25 @@
+@import './variables';
+
+.button {
+    display: block;
+    padding: 4px 23px;
+    height: 34px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    background: $main-color;
+    border-radius: 80px;
+    border: none;
+    outline: none;
+    color: $text-black-color;
+    transition: all .3s ease;
+    cursor: pointer;
+    &:hover {
+        background: #FFE302;
+    }
+    &:disabled {
+        background: #B4B4B4;
+        color: rgba(255, 255, 255, 0.87);
+    }
+}
