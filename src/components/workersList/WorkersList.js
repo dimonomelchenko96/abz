@@ -30,7 +30,7 @@ const WorkersList = () => {
 
 
 	const spinner = loading ? <Preloader /> : null;
-	const items = <View data={workersList} />;
+	const items = <List data={workersList} />;
 
 	return (
 		<section className="worker">
@@ -48,14 +48,14 @@ const WorkersList = () => {
 	);
 };
 
-const View = ({ data }) => {
+const List = ({ data }) => {
 	return (
 		<div className="worker__list">
-		{data.map((item) => {
-			return (
-				<WorkerListItem key={item.id} {...item}/>
-			);
-		})}
+			{data.map((item) => {
+				return (
+					<WorkerListItem key={item.id} {...item}/>
+				);
+			})}
 		</div>
 	);
 };
