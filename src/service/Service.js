@@ -6,7 +6,7 @@ const useService = () => {
     const _apiBase = 'https://frontend-test-assignment-api.abz.agency/api/v1';
 
 
-    const getWorker = async (page = 1) => {
+    const getWorkers = async (page = 1) => {
         const res = await request(`${_apiBase}/users?page=${page}&count=6`);
         return  res;
     }
@@ -21,13 +21,23 @@ const useService = () => {
         return res.positions;
     }
 
-    const addUser = async (method , body, headers) => {
-        const res = await request(`${_apiBase}/users`, method, body, headers)
+    const addUser = async ({position_id, name, email, phone, photo}) => {
+
+        const token = await getToken();
+
+		const formData = new FormData();
+		formData.append('position_id', +position_id);
+		formData.append('name', name);
+		formData.append('email', email);
+		formData.append('phone', `+${phone}`);
+		formData.append('photo', photo);
+
+        const res = await request(`${_apiBase}/users`, 'POST', formData, {'Token': token})
         return res;
     }
 
 
-    return {loading, error, clearError, getWorker, getToken, addUser, getPosition};
+    return {loading, error, clearError, getWorkers, getToken, addUser, getPosition};
 }
 
 

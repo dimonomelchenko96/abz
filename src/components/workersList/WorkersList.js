@@ -11,7 +11,7 @@ const WorkersList = () => {
 
 	const {workersList, 
 		   workersListPage, 
-		   ListLastPage , 
+		   workersListLastPage , 
 		   workersListLoading : loading, 
 		   workersListError: error
 		} = useSelector(state => state.workersList); 
@@ -38,8 +38,8 @@ const WorkersList = () => {
 				<h2 className="worker__title">Working with GET request</h2>
 				{items}
 				{spinner}
-				{!loading && (
-					<button disabled={ListLastPage} className="button" onClick={() => onRequest(workersListPage)}>
+				{!loading && !!workersList.length &&(
+					<button disabled={workersListLastPage} className="button" onClick={() => onRequest(workersListPage)}>
 						Show more
 					</button>
 				)}

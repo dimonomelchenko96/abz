@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { workersListReset , fetchWorkersList} from '../workersList/workerListSlice';
+import {addNewUser} from '../workersList/workerListSlice'
 import useService from '../../service/Service';
 
 import "./workersAddForm.scss";
@@ -14,7 +14,7 @@ const WorkersAddForm = () => {
       "image/jpeg",
     ];
 
-	const {addUser, getPosition, getWorker , getToken} = useService();
+	const {getPosition} = useService();
 
 	const dispatch = useDispatch();
 
@@ -24,28 +24,6 @@ const WorkersAddForm = () => {
 		getPosition()
 			.then(res => setPositions(res));
 	}, [])
-
-	const addNewUser = async ({position_id, name, email, phone, photo}) => {
-		const token = await getToken();
-
-		const formData = new FormData();
-		formData.append('position_id', +position_id);
-		formData.append('name', name);
-		formData.append('email', email);
-		formData.append('phone', `+${phone}`);
-		formData.append('photo', photo);
-
-		
-		
-		addUser('POST', formData, {'Token': token})
-			.then(data => console.log(data))
-			.then(() => {
-				dispatch(workersListReset())
-			})
-			.then(() => {
-				dispatch(fetchWorkersList(1))
-			})	
-	}
 
 	return (
 		<section className='form-section'>
@@ -85,7 +63,7 @@ const WorkersAddForm = () => {
 									(value) => !value || (value.size && value.size >= 70 * 70)
 								)            
 					})}
-					onSubmit={values => addNewUser(values)}
+					onSubmit={values => dispatch(addNewUser(values))}
 				>
 					{({values, setFieldValue, errors, touched}) => (
 						<Form className='form form-section__form'>

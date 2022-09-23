@@ -1,6 +1,5 @@
 import { createSlice , createAsyncThunk} from "@reduxjs/toolkit";
 import useService from '../../service/Service';
-import { useHttp } from "../../hooks/http.hook";
 
 const initialState = {
     workersList: [],
@@ -13,18 +12,29 @@ const initialState = {
 export const fetchWorkersList = createAsyncThunk(
     'workersList/fetchWorkerList',
     (page) => {
-        const {getWorker} = useService();
-        console.log(1)
-        return getWorker(page);
-    }
+        const {getWorkers} = useService();
+        return getWorkers(page);    
+    },
 );
+
+export const addNewUser = (data) => (dispatch) => {
+    const {addUser} = useService();
+    addUser(data)
+        .then(() => {
+            dispatch(workersListReset())
+        })
+        .then(() => {
+            dispatch(fetchWorkersList(1))
+        })	
+}
 
 const workerListSlice = createSlice({
     name: 'workersList',
     initialState,
     reducers: {
         workersListReset : (state) => {
-            state = initialState
+            state.workersList = [];
+            state.workersListPage = 1;
         }
     },
     extraReducers: builder => {
@@ -35,7 +45,7 @@ const workerListSlice = createSlice({
         .addCase(fetchWorkersList.fulfilled, (state, {payload}) => {
             state.workersList = [...state.workersList, ...payload.users];
             state.workersListPage = state.workersListPage + 1;
-            state.ListLastPage = !payload.links.next_url;
+            state.workersListLastPage = !payload.links.next_url;
             state.workersListLoading = false;
         })
         .addCase(fetchWorkersList.rejected, (state) => {
