@@ -11,8 +11,8 @@ const Navbar = () => {
 						<img src={logo} alt="Logo" className="navbar__logo-img" />
 					</a>
 					<div className="navbar__buttons">
-						<button className="button">Users</button>
-						<button className="button">Sign up</button>
+						<a href='#workers' className="button">Users</a>
+						<a href='#form-section' className="button">Sign up</a>
 					</div>
 				</div>
 			</div>

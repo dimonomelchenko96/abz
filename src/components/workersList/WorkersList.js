@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Preloader from "../preloader/Preloader";
 import WorkerListItem from './WorkersListItem'
-import { fetchWorkersList } from "./workerListSlice";
+import { fetchWorkersList } from "../../slices/appSlice";
 
 import "./workersList.scss";
 
@@ -14,7 +14,7 @@ const WorkersList = () => {
 		   workersListLastPage , 
 		   workersListLoading : loading, 
 		   workersListError: error
-		} = useSelector(state => state.workersList); 
+		} = useSelector(state => state.app); 
 
 
 
@@ -33,9 +33,9 @@ const WorkersList = () => {
 	const items = <List data={workersList} />;
 
 	return (
-		<section className="worker">
+		<section className="workers" id="workers">
 			<div className="container">
-				<h2 className="worker__title">Working with GET request</h2>
+				<h2 className="workers__title">Working with GET request</h2>
 				{items}
 				{spinner}
 				{!loading && !!workersList.length &&(
@@ -50,7 +50,7 @@ const WorkersList = () => {
 
 const List = ({ data }) => {
 	return (
-		<div className="worker__list">
+		<div className="workers__list">
 			{data.map((item) => {
 				return (
 					<WorkerListItem key={item.id} {...item}/>

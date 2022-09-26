@@ -1,0 +1,17 @@
+@import '../../style/mixin.scss';
+@import '../../style/variables.scss';
+
+.error {
+    &__title {
+        @include title;
+        color: $text-black-color;
+        margin-bottom: 50px;
+    }
+    &__img {
+        display: 'block';
+        object-fit: 'contain';
+        margin: 0 auto;
+        width: 250px;
+        height: 250px;
+    }
+}

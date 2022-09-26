@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import workersListReducer from '../components/workersList/workerListSlice';
+import appReducer from '../slices/appSlice';
 
 const store = configureStore({
-    reducer: {
-        workersList: workersListReducer
+    reducer : {
+        app : appReducer
     },
     devTools: process.env.NODE_ENV !== 'production',
 })

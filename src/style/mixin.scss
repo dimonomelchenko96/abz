@@ -5,10 +5,19 @@
     line-height: 40px;
     text-align: center;
 }
-@mixin secondaryText {
-    font-family: 'Nunito';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 26px;
+@mixin secondaryText($is_imp: false) {
+    @if $is_imp == false {
+        font-family: 'Nunito';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 26px;
+    }
+    @else {
+        font-family: 'Nunito'!important;
+        font-style: normal!important;
+        font-weight: 400!important;
+        font-size: 16px!important;
+        line-height: 26px!important;
+    }
 }

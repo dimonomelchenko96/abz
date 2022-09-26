@@ -1,5 +1,5 @@
 import { createSlice , createAsyncThunk} from "@reduxjs/toolkit";
-import useService from '../../service/Service';
+import useService from '../service/Service';
 
 const initialState = {
     workersList: [],
@@ -7,6 +7,7 @@ const initialState = {
     workersListError: false,
     workersListPage: 1,
     workersListLastPage: false,
+    formStatus: 'idle',
 }
 
 export const fetchWorkersList = createAsyncThunk(
@@ -19,22 +20,43 @@ export const fetchWorkersList = createAsyncThunk(
 
 export const addNewUser = (data) => (dispatch) => {
     const {addUser} = useService();
+    dispatch(formSending());
     addUser(data)
         .then(() => {
-            dispatch(workersListReset())
+            dispatch(formSended())
+            dispatch(workersListReset());
+            dispatch(fetchWorkersList(1));
         })
-        .then(() => {
-            dispatch(fetchWorkersList(1))
-        })	
+        .catch(() => {
+            dispatch(formSendingError())
+        })
+        .finally(() => {
+            setTimeout(() => {
+                dispatch(formStatusReset())
+            }, 5000)
+        })
+        
 }
 
-const workerListSlice = createSlice({
+const appSlice = createSlice({
     name: 'workersList',
     initialState,
     reducers: {
         workersListReset : (state) => {
             state.workersList = [];
             state.workersListPage = 1;
+        },
+        formStatusReset : (state) => {
+            state.formStatus = 'idle'
+        },
+        formSending : (state) => {
+            state.formStatus = 'sending'
+        },
+        formSended: (state) => {
+            state.formStatus = 'success'
+        },
+        formSendingError : (state) => {
+            state.formStatus = 'error'
         }
     },
     extraReducers: builder => {
@@ -56,6 +78,6 @@ const workerListSlice = createSlice({
     }
 })
 
-export default workerListSlice.reducer;
+export default appSlice.reducer;
 
-export const {workersListReset} = workerListSlice.actions;
+export const {workersListReset, formSending, formSendingError, formSended, formStatusReset} = appSlice.actions;

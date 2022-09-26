@@ -1,7 +1,7 @@
 @import '../../style/mixin.scss';
 @import '../../style/variables.scss';
 
-.worker {
+.workers {
     padding: 140px 0;
     .button {
         margin: 0 auto;
@@ -32,6 +32,7 @@
             margin: 0 auto;
         }
         &-email, &-position, &-name , &-phone {  
+            display: block;
             text-align: center;
             overflow: hidden;
             white-space: nowrap;
@@ -43,6 +44,13 @@
         }
         &-position, &-name {
             margin-top: 20px;
+        }
+        &-tooltip {
+            padding: 3px 16px!important;
+            background: rgba(0, 0, 0, 0.87)!important;
+            border-radius: 4px!important;
+            @include secondaryText(true);  
+            color: #FFFFFF!important;
         }
     }
 }

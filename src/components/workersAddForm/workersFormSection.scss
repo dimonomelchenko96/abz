@@ -7,12 +7,21 @@
         @include title;
         color: $text-black-color;
     }
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 380px;
+    }
     &__form {
         max-width: 380px;
         width: 100%;
         margin: 50px auto 0;
     }
 }
+
+// можливо форма могла б перевикористовуватись, виніс стилі в окремий блок
 
 .form {
     &__item {
@@ -35,9 +44,9 @@
         align-items: center;
         color: $text-black-color;
         &-error {
-            border: 2px solid #CB3D40;
+            border: 2px solid #CB3D40!important;
             &+label {
-                color: #CB3D40;  
+                color: #CB3D40!important;  
             }
         }
 
@@ -55,7 +64,7 @@
             pointer-events: none;
         }
     }
-    &__error {        
+    &__error, &__helper {        
         padding-left: 16px;
         margin-top: 4px;
         font-family: 'Nunito';
@@ -64,6 +73,9 @@
         font-size: 12px;
         line-height: 14px;
         color: #CB3D40;
+    }
+    &__helper {
+        color: #7E7E7E;
     }
     &__radio {
         &-block {
@@ -99,7 +111,7 @@
                         transform: translateY(-50%);
                         width: 20px;
                         height: 20px;
-                        border: 1px solid #00BDD3;
+                        border: 1px solid #D0CFCF;
                         border-radius: 100%;
                     }
                     &::after {
@@ -117,9 +129,14 @@
                     }
                 }
                 &:checked {
-                    + label::after {
+                    + label{
+                        &::after {
                             opacity: 1;
                         }
+                        &::before {
+                            border: 1px solid #00BDD3;
+                        }
+                    }
         
                 }
             }
@@ -150,7 +167,6 @@
         }
         &-input {
             opacity: 0;
-            visibility: hidden;
             position: absolute;
         }
         &-name {
@@ -161,8 +177,20 @@
             flex-grow: 1;
             color: #7E7E7E;
             border: 1px solid #D0CFCF;
-            border-left: none;
+            border-left: none!important;
             border-radius: 0 4px 4px 0;
+        }
+    }
+    &__success {
+        &-title {
+            @include title;
+            color: $text-black-color;
+            margin-bottom: 50px;
+        }
+        &-img {
+            max-width: 328px;
+            width: 100%;
+            object-fit: cover;
         }
     }
 }
