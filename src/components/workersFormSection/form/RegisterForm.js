@@ -99,7 +99,7 @@ const RegisterForm = () => {
                         <input 
                             name='photo'
                             type="file" 
-                            accept='image/jpg,image/jpeg'
+                            // accept='image/jpg,image/jpeg'
                             id='file' 
                             className='form__photo-input'
                             onChange={(e) => {

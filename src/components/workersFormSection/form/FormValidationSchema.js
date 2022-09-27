@@ -1,31 +1,33 @@
 import * as Yup from 'yup';
 
 const phoneRegExp = /^[\+]{0,1}380([0-9]{9})$/;
-const SUPPORTED_FORMATS = ["image/jpg","image/jpeg"]
+const SUPPORTED_FORMATS = ["image/jpg","image/jpeg"];
 
-const imageWidthAndHeight = (provideFile) => {
-    const imgDimensions = { 
-        width: null, 
-        height: null 
-    };
+// валідація на тип файла та на його розміри не уживається разом
 
-    return new Promise(resolve => {
-        const reader = new FileReader();
+// const imageWidthAndHeight = (provideFile) => {
+//     const imgDimensions = { 
+//         width: null, 
+//         height: null 
+//     };
+
+//     return new Promise(resolve => {
+//         const reader = new FileReader();
         
-        reader.readAsDataURL(provideFile);
-        reader.onload = function () {
-            const img = new Image();
-            img.src = reader.result;
+//         reader.readAsDataURL(provideFile);
+//         reader.onload = function () {
+//             const img = new Image();
+//             img.src = reader.result;
 
-            img.onload = function () {
-                imgDimensions.width = img.width;
-                imgDimensions.height = img.height;
+//             img.onload = function () {
+//                 imgDimensions.width = img.width;
+//                 imgDimensions.height = img.height;
 
-                resolve(imgDimensions);
-            }
-        };
-    });
-}
+//                 resolve(imgDimensions);
+//             }
+//         };
+//     });
+// }
 
 export const validationSchema =  Yup.object({
     name: Yup.string()
@@ -42,29 +44,29 @@ export const validationSchema =  Yup.object({
             .matches(phoneRegExp, 'Phone number is not valid'),
     photo: Yup.mixed()
             .required("A photo is required") 
-            // валідація на тип файла та на його розміри не уживається разом
-            // .test(
-            //     "fileFormat",
-            //     "Unsupported Format",
-            //     value => {
-            //         return !value || (value && SUPPORTED_FORMATS.includes(value.type))
-            //     }
-            // )
+            
+            .test(
+                "fileFormat",
+                "Unsupported Format",
+                value => {
+                    return !value || (value && SUPPORTED_FORMATS.includes(value.type))
+                }
+            )
             .test(
                 "fileSize",
                 "File size must not exceed 5MB",
                 value => !value || (value && value.size <= 5242880)
             )
-            .test(
-                "fileResolution",
-                "Resolution at least 70x70px",       
-				async (value) => {
-					if(!value) {
-						return true;
-					}
+            // .test(
+            //     "fileResolution",
+            //     "Resolution at least 70x70px",       
+			// 	async (value) => {
+			// 		if(!value) {
+			// 			return true;
+			// 		}
 
-                    const imgDimensions = await imageWidthAndHeight(value);
-                    return imgDimensions.width >= 70 && imgDimensions.height >= 70
-				} 
-            )               
+            //         const imgDimensions = await imageWidthAndHeight(value);
+            //         return imgDimensions.width >= 70 && imgDimensions.height >= 70
+			// 	} 
+            // )               
 })
