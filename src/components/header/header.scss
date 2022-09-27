@@ -1,7 +1,7 @@
 @import '../../style/mixin.scss';
 
 .header {
-    background: url(../../assets/pexels-alexandr-podvalny-1227513.jpeg) center center/cover no-repeat;
+    background: url(../../assets/header-bg.jpg) center center/cover no-repeat;
     &__title {
         @include title;
         color:#FFFFFF;
@@ -15,12 +15,28 @@
     &__wrapper {
         display: flex;
         flex-direction: column;
-        padding: 164px 0;
+        padding: 164px 0 163px;
         margin: 0 auto;
         max-width: 380px;
         width: 100%;
         .button {
             margin: 32px auto 0;
+        }
+    }
+}
+
+@media screen and (max-width: 993px){
+    .header {
+        &__wrapper {
+            padding: 89px 0 88px;
+        }
+    }
+}
+
+@media screen and (max-width: 577px){
+    .header {
+        &__wrapper {
+            padding: 49px 16px 71px;
         }
     }
 }

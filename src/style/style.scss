@@ -3,6 +3,7 @@
 @import './button';
 @import './mixin.scss';
 
+
 * {
     font-family: 'Nunito', sans-serif;
     font-style: normal;
@@ -86,16 +87,21 @@ body {
     }
 }
 
-@media screen and (max-width: 1200px){
+
+@media screen and (max-width: 1201px){
     .container {
         width: 100%;
         padding: 0 60px;
     }
 }
 
-@media screen and (max-width: 992px){
+@media screen and (max-width: 993px){
     .container {
         padding: 0 32px;
     }
 }
-
+@media screen and (max-width: 577px){
+    .container {
+        padding: 0 16px;
+    }
+}

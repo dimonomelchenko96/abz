@@ -7,8 +7,6 @@ const WorkersListItem = ({photo, name, position, email, phone}) => {
 		return phoneNumber.replace(/(\d{2})(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 ($2) $3 $4 $5');
 	};
 
-
-
 	return (
 		<div  className="workers__item">
 			<img 
@@ -31,7 +29,7 @@ const WorkersListItem = ({photo, name, position, email, phone}) => {
 				href={`mailto:${email}`} 
 				className="workers__item-email">
 					{email}
-				</a>
+			</a>
 			<a 
 				href={`tel:${phone}`} 
 				className="workers__item-phone">

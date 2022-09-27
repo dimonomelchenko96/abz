@@ -2,6 +2,8 @@
 @import '../../style/variables.scss';
 
 .error {
+    display: flex;
+    flex-direction: column;
     &__title {
         @include title;
         color: $text-black-color;

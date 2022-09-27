@@ -1,7 +1,7 @@
 import {useHttp} from '../hooks/http.hook'
 
 const useService = () => {
-    const {loading, request, error, clearError} = useHttp();
+    const {request} = useHttp();
 
     const _apiBase = 'https://frontend-test-assignment-api.abz.agency/api/v1';
 
@@ -37,7 +37,7 @@ const useService = () => {
     }
 
 
-    return {loading, error, clearError, getWorkers, getToken, addUser, getPosition};
+    return {getWorkers, getToken, addUser, getPosition};
 }
 
 

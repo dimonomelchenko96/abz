@@ -54,3 +54,21 @@
         }
     }
 }
+
+@media screen and (max-width: 769px){
+    .workers {
+        &__list {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+    }
+}
+
+@media screen and (max-width: 577px){
+    .workers {
+        &__list {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+    }
+}

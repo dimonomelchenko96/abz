@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { validationSchema } from './FormValidationSchema';
 import useService from '../../../service/Service';
+import Preloader from '../../preloader/Preloader';
 import {addNewUser} from '../../../slices/appSlice'
 
 const RegisterForm = () => {
@@ -12,10 +13,14 @@ const RegisterForm = () => {
     const {getPosition} = useService();
 
 	const [positions, setPositions] = useState([]);
+    const [positionsError, setPositionsError] = useState(false);
 
 	useEffect(() => {
 		getPosition()
-			.then(res => setPositions(res));
+			.then(res => setPositions(res))
+            .catch(() => {
+                setPositionsError(true);
+            })
 	}, [])
 
      return (
@@ -85,34 +90,16 @@ const RegisterForm = () => {
                     </div>
                     <div className='form__radio-block'>
                         <div className='form__radio-title'>Select your position</div>
-                        <Field name='position_id' >
-                            {() => {
-                                return positions.map(({id, name}) => {
-                                    return (
-                                        <div key={id} className='form__radio-item'>
-                                            <input
-                                                type="radio"
-                                                name='position_id' 
-                                                id={`radio-${id}`} 
-                                                value={id}
-                                                checked={values.position_id == id}
-                                                onChange={(e) => {
-                                                    console.log(values.position_id, e.currentTarget.value);
-                                                    setFieldValue("position_id", e.currentTarget.value);
-                                                }}
-                                            />
-                                            <label htmlFor={`radio-${id}`}>{name}</label>
-                                        </div>
-                                    )	
-                                })
-                            }}
-                        </Field>
+                        {positions.length === 0 && !positionsError ? <Preloader/> : null}
+                        {positionsError && <div>Error, please reload page</div>}
+                        {positions.length > 0 && radioButtons(positions, values, setFieldValue)}
                         <ErrorMessage className='form__error' name='radio' component="div"/>
                     </div>
                     <div className='form__photo-block'>
                         <input 
                             name='photo'
                             type="file" 
+                            accept='image/jpg,image/jpeg'
                             id='file' 
                             className='form__photo-input'
                             onChange={(e) => {
@@ -144,6 +131,31 @@ const RegisterForm = () => {
             </Formik>
         </div>
   )
+}
+
+const radioButtons = (positions, values, setFieldValue) => {
+    return (
+        <Field name='position_id' >
+            {() => {
+                return positions.map(({id, name}) => {
+                    return (
+                        <div key={id} className='form__radio-item'>
+                            <input
+                                type="radio"
+                                id={`radio-${id}`} 
+                                value={id}
+                                checked={values.position_id == id}
+                                onChange={(e) => {
+                                    setFieldValue("position_id", e.currentTarget.value);
+                                }}
+                            />
+                            <label htmlFor={`radio-${id}`}>{name}</label>
+                        </div>
+                    )	
+                })
+            }}
+        </Field>
+    )
 }
 
 export default RegisterForm;
