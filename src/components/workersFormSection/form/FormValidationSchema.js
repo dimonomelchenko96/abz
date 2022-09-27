@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 
 const phoneRegExp = /^[\+]{0,1}380([0-9]{9})$/;
+const SUPPORTED_FORMATS = ["image/jpg","image/jpeg"]
 
 const imageWidthAndHeight = (provideFile) => {
     const imgDimensions = { 
@@ -41,6 +42,14 @@ export const validationSchema =  Yup.object({
             .matches(phoneRegExp, 'Phone number is not valid'),
     photo: Yup.mixed()
             .required("A photo is required") 
+            // валідація на тип файла та на його розміри не уживається разом
+            // .test(
+            //     "fileFormat",
+            //     "Unsupported Format",
+            //     value => {
+            //         return !value || (value && SUPPORTED_FORMATS.includes(value.type))
+            //     }
+            // )
             .test(
                 "fileSize",
                 "File size must not exceed 5MB",
@@ -55,7 +64,6 @@ export const validationSchema =  Yup.object({
 					}
 
                     const imgDimensions = await imageWidthAndHeight(value);
-                    
                     return imgDimensions.width >= 70 && imgDimensions.height >= 70
 				} 
             )               

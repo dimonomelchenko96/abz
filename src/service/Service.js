@@ -36,9 +36,7 @@ const useService = () => {
         return res;
     }
 
-
     return {getWorkers, getToken, addUser, getPosition};
 }
-
 
 export default useService;
