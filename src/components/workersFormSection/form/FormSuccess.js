@@ -1,5 +1,5 @@
 import React from 'react'
-import successImg from '../../../assets/success-image.png'
+import successImg from '../../../assets/img/success-image.png'
 
 const FormSuccess = () => {
  	return (

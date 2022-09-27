@@ -1,5 +1,5 @@
 import ReactTooltip from 'react-tooltip';
-import defaultImg from '../../assets/defaul-img.png'
+import defaultImg from '../../assets/img/defaul-img.png'
 
 const WorkersListItem = ({photo, name, position, email, phone}) => {
 	// можна була винести в utils, позалишав для наглядності
