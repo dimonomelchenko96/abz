@@ -34,6 +34,6 @@ export const validationSchema =  Yup.object({
             .test(
                 "fileResolution",
                 "Resolution at least 70x70px",       
-				value => value.width > 70 && value.height > 70  
+				value => !value || value.width > 70 && value.height > 70  
             )               
 })
