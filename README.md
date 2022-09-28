@@ -2,7 +2,7 @@
 
 ## Використанні технології :
     
-- @reduxjs/toolkit
+- redux-toolkit
 - formik
 - gh-pages
 - react
