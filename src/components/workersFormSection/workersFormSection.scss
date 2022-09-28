@@ -167,6 +167,7 @@
         &-input {
             opacity: 0;
             position: absolute;
+            z-index: -1;
             &:focus {
                 & +.form__photo-wrapper .form__photo-name {
                     border: 2px solid #D0CFCF;

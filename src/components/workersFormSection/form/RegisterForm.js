@@ -2,12 +2,13 @@ import { useDispatch } from 'react-redux';
 import React, {useState, useEffect} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { validationSchema } from './FormValidationSchema';
+import { convertFileToImg } from '../../../utils/helpers';
 import useService from '../../../service/Service';
 import Preloader from '../../preloader/Preloader';
 import {addNewUser} from '../../../slices/appSlice'
 
 const RegisterForm = () => {
-
+    
     const dispatch = useDispatch();
 
     const {getPosition} = useService();
@@ -99,12 +100,9 @@ const RegisterForm = () => {
                         <input 
                             name='photo'
                             type="file" 
-                            // accept='image/jpg,image/jpeg'
                             id='file' 
                             className='form__photo-input'
-                            onChange={(e) => {
-                                setFieldValue("photo", e.currentTarget.files[0]);
-                            }}
+                            onChange={(e) =>  convertFileToImg(e, setFieldValue)}
                         />
                         <div className='form__photo-wrapper'>
                             <label 

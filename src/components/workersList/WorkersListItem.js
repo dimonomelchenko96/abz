@@ -1,11 +1,8 @@
 import ReactTooltip from 'react-tooltip';
+import { formatPhone } from '../../utils/helpers';
 import defaultImg from '../../assets/img/defaul-img.png'
 
 const WorkersListItem = ({photo, name, position, email, phone}) => {
-	// можна була винести в utils, позалишав для наглядності
-	const formatPhone = (phoneNumber) => {
-		return phoneNumber.replace(/(\d{2})(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 ($2) $3 $4 $5');
-	};
 
 	return (
 		<div  className="workers__item">
